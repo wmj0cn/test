@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<script type="text/javascript">
+	var connection = new WebSocket('ws://192.168.4.1:81/', [ 'arduino' ]);
+
+	connection.onopen = function() {
+		connection.send('Connect ' + new Date());
+	};
+
+	connection.onerror = function(error) {
+		console.log('WebSocket Error ', error);
+	};
+
+	connection.onmessage = function(e) {
+		alert("Read:" + e.data);
+		console.log('Server: ', e.data);
+	};
+
+	function singleRead() {
+		var singleRead = 'r';
+		connection.send(singleRead);
+	}
+
+	function scan() {
+		var singleRead = 's';
+		connection.send(singleRead);
+	}
+</script>
+</head>
+
+<body>
+	<h1>超级手持机</h1>
+	<div>
+		<button onclick="singleRead()">单次读取</button>
+		<button onclick="scan()">Read Barcode/QR Code</button>
+	</div>
+
+	
+</body>
+
+</html>
