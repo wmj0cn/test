@@ -1,42 +1,133 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-<script type="text/javascript">
-	var connection = new WebSocket('ws://192.168.4.1:81/', [ 'arduino' ]);
-
-	connection.onopen = function() {
-		connection.send('Connect ' + new Date());
-	};
-
-	connection.onerror = function(error) {
-		console.log('WebSocket Error ', error);
-	};
-
-	connection.onmessage = function(e) {
-		alert("Read:" + e.data);
-		console.log('Server: ', e.data);
-	};
-
-	function singleRead() {
-		var singleRead = 'r';
-		connection.send(singleRead);
-	}
-
-	function scan() {
-		var singleRead = 's';
-		connection.send(singleRead);
-	}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
+<style>
+    .header {
+        background-color: azure;
+        position: relative;
+    }
+
+    .top-bar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 5px;
+        margin-top: 5px;
+        height: 19px;
+        background-color: bisque;
+    }
+
+    .other {
+        height: 199px;
+        background-color: rgb(138, 97, 48);
+    }
+
+   
+
+    
+
+    body {
+        display: grid;
+        grid-template-areas: 'header'
+            'list list list';
+        grid-gap: 10px;
+
+        padding: 10px;
+
+
+    }
+
+    .header {
+        grid-area: 'header';
+        border-radius: 2px 5px;
+    }
+
+    .item-list {
+        grid-area: 'list';
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .item {
+        /* height: 30px; */
+        background-color: rgb(70, 102, 131);
+        width: 100%;
+        margin: 2px 0;
+        border-radius: 2px;
+    }
+
+    .hint {
+        display: flex;
+        justify-items: center;
+        width: 100%;
+        border-radius: 2px 5px;
+    }
+
+    .search-tool {
+        width: 100%;
+        display: flex;
+        border-radius: 2px 5px;
+      
+    }
+
+    .search-tool input {
+       width: 100%;
+       border-radius: 2px 0 0 5px;
+    }
+
+    .search-tool button {
+        border-radius: 0 2px 5px 0;
+        color: rgb(110, 132, 192);
+    }
+
+    .banner {
+        height: 110px;
+        background-image: url('https://www.lhsimprint.com/wp-content/uploads/2017/05/paint.png');
+    }
+</style>
 
 <body>
-	<h1>超级手持机</h1>
-	<div>
-		<button onclick="singleRead()">单次读取</button>
-		<button onclick="scan()">Read Barcode/QR Code</button>
-	</div>
+    <div class="header">
+        <div class="banner"></div>
+        <div class="hint" id='myhint'>
+            <div class="search-tool"><input   type="text" name="" id=""><button>Search</button></div>
 
-	
+        </div>
+    </div>
+    <div class="item-list">
+        <div class="item">
+            <p>this is a title</p>
+        </div>
+        <div class="item">
+            <p>this is a title</p>
+        </div>
+
+    </div>
 </body>
+<script>
+    // document.addEventListener('mousemove', function (e) {
+    //     let body = document.querySelector('body');
+    //     let circle = document.getElementById('2myhint')
+    //     let left = e.offsetX;
+    //     let top = e.offsetY;
+    //     circle.style.left = left + 'px';
+    //     circle.style.top = top + 'px';
+    // });
+</script>
 
 </html>
+<!--
+
+
+    // var sheetName1 = sheetInfo.SheetName[1];
+    // sheetName1.replace('Main(', '');
+    // sheetName1.replace(')', '');
+    // var width = sheetName1.Part[0, ';'].toDouble();
+    // var height = sheetName1.Part[1, ';'].toDouble();
+-->
